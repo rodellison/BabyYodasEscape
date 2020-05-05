@@ -1,6 +1,5 @@
-using System;
+
 using System.Collections;
-using __Scripts;
 using UnityEngine;
 using Managers;
 using UnityEngine.InputSystem;

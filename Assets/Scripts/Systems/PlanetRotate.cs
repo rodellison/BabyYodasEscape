@@ -5,7 +5,7 @@ namespace Systems
     public class PlanetRotate : MonoBehaviour
     {
         // Start is called before the first frame update
-        public float RotationSpeed = 2f;
+        public float RotationSpeed = 3f;
  
         // Update is called once per frame
         void Update()

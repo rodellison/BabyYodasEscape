@@ -1,4 +1,4 @@
-using System;
+
 using Base_Project._Scripts.GameData;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace Systems
 
         private void Update()
         {
-            if (PlayerSpeed.Value > 0 && !gameObjectDestroyed)
+            if (PlayerSpeed.Value > 0)
                 MoveObstacle();
         }
 
@@ -25,8 +25,7 @@ namespace Systems
 
             if (newPosition.z < ZBoundaryBehind.Value)
             {
-                Destroy(gameObject);
-                gameObjectDestroyed = true;
+               gameObject.SetActive(false);  //return it to the pool
             }
             transform.position = newPosition;
         }

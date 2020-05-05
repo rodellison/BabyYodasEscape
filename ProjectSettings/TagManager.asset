@@ -9,6 +9,7 @@ TagManager:
   - LaserPool
   - Obstacle
   - XWing
+  - ObstacleSpawner
   layers:
   - Default
   - TransparentFX

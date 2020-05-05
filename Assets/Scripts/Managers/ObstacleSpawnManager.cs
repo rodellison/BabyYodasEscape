@@ -1,24 +1,35 @@
-using System;
 using System.Collections;
+using __Scripts;
 using Base_Project._Scripts.GameData;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 
-namespace Systems
+namespace Managers
 {
-    public class ObstacleSpawnerSystem : MonoBehaviour
+    public class ObstacleSpawnManager : MonoBehaviour
     {
         public FloatVariable PlayerSpeed;
         public FloatVariable MaxHorizontalSpawnArea;
-        public GameObject[] prefabObstacles;
+
         private bool readyToSpawnObstacle;
         public FloatVariable ObstacleSpawnTime;
-
+ 
+        private ObstacleObjectPooler[] childrenWithObjectPools;
 
         private void OnEnable()
         {
             readyToSpawnObstacle = true;
+            //We want to get all of the ObstacleObjectPoolers so we can randomly choose one at spawn time
+            childrenWithObjectPools = GetComponentsInChildren<ObstacleObjectPooler>();
+        }
+
+        public void SetupForRestart()
+        {
+            GameObject[] currentObstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+            foreach (GameObject go in currentObstacles)
+            {
+                go.SetActive(false);
+            }
         }
 
         private void Update()
@@ -36,8 +47,19 @@ namespace Systems
             Vector3 positionToSpawn = new Vector3(
                 Random.Range(-MaxHorizontalSpawnArea.Value, MaxHorizontalSpawnArea.Value), 0,
                 transform.position.z);
-            GameObject randomObstacle = Instantiate(prefabObstacles[Random.Range(0, prefabObstacles.Length)],
-                positionToSpawn, Quaternion.Euler(0, Random.Range(-30, 30), 0));
+            GameObject randomObstacle = childrenWithObjectPools[Random.Range(0, childrenWithObjectPools.Length)]
+                .GetPooledObject();
+            //Make sure we got an object before trying to manipulate it...
+            if (randomObstacle != null)
+            {
+                randomObstacle.transform.position = positionToSpawn;
+
+                //Trying to give equal chance of object being rotated 180 degrees for variation
+                randomObstacle.transform.rotation = UnityEngine.Random.Range(0, 10) < 5
+                    ? Quaternion.Euler(0, 0, 0)
+                    : Quaternion.Euler(0, 180, 0);
+                randomObstacle.SetActive(true);
+            }
 
             StartCoroutine(ScaleUpSpawnedItem(randomObstacle));
             yield return new WaitForSeconds(ObstacleSpawnTime.Value);
@@ -54,8 +76,8 @@ namespace Systems
             Vector3 tempScale = Vector3.zero;
             theNewObstacle.transform.localScale = tempScale;
             float timeToScale = 0.1f;
-            
-            float rate = 1f/timeToScale; 
+
+            float rate = 1f / timeToScale;
 
             for (float x = 0.0f; x <= 1.0f; x += Time.deltaTime * rate)
             {
@@ -66,7 +88,8 @@ namespace Systems
                 theNewObstacle.transform.localScale = tempScale;
                 yield return null;
             }
-           
+
+            theNewObstacle.transform.localScale = ObstacleScale;
         }
     }
 }

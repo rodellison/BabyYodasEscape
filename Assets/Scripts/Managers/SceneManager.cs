@@ -16,8 +16,6 @@ namespace Managers
         public FloatVariable DistanceCovered;
 
         public float DestinationDistance;
-        public float LevelTime;
-
         public float accelerateDuration = 2f;
 
         public GameEvent WonGame;
@@ -45,15 +43,12 @@ namespace Managers
 
         public void RestartLevel()
         {
-            GameObject[] currentObstaclesOnPlayarea = GameObject.FindGameObjectsWithTag("Obstacle");
-            foreach (GameObject go in currentObstaclesOnPlayarea)
-            {
-                Destroy(go);
-            }
-
             thePD.SetActive(true);
             thePD.GetComponent<PlayableDirectorManager>().QueueRestartLevel();
+            //Reset explosion, fire components, audio, etc..
             GameObject.FindWithTag("XWing").GetComponent<XWingManager>().SetupForRestart();
+            //Deactivate any current scene obstacles 
+            GameObject.FindWithTag("ObstacleSpawner").GetComponent<ObstacleSpawnManager>().SetupForRestart();
             DistanceCovered.Value = 0;
             PlayerCrashRecorded = false;
             PlayerSuccessRecorded = false;
@@ -109,8 +104,6 @@ namespace Managers
 
                 DistanceLeft.Value = (DestinationDistance - DistanceCovered.Value).ToString("F1");
             }
-
-//            TimeLeft.Value = UITimeFormatter.FloatToTime(TimeLeft.Value - Time.deltaTime, "00:0");
         }
 
         IEnumerator LevelFinale(bool wonGame)

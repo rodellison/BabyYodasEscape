@@ -17,6 +17,7 @@ namespace Systems
             StartCoroutine(AutoDestroy());
         }
 
+        //TOD implement OnTriggerEnter to detect Laser collision with something
         private void Update()
         {
             if (!collidedWithSomething)

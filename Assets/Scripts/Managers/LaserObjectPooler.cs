@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace __Scripts
+namespace Managers
 {
     public class LaserObjectPooler : MonoBehaviour
     {
@@ -9,7 +9,7 @@ namespace __Scripts
         private List<GameObject> _pooledObjects;
         public GameObject objectToPool;
         public int maxItemsToPool = 15;
-        private GameObject _poolAnchor;
+        private Transform _poolParent;
         public bool canExpand;
 
         void Awake()
@@ -20,10 +20,15 @@ namespace __Scripts
         // Use this for initialization of the Object Pool
         void Start()
         {
+            //Check if we've already been provided some other Game Object to serve as this pools parent..
+            //if not, then just use this object
+            if (_poolParent == null)
+                _poolParent = transform;
+            
             _pooledObjects = new List<GameObject>();
             for (int i = 0; i < maxItemsToPool; i++)
             {
-                GameObject obj = Instantiate(objectToPool, Vector3.zero, Quaternion.identity, transform);
+                GameObject obj = Instantiate(objectToPool, Vector3.zero, Quaternion.identity, _poolParent);
                 obj.SetActive(false);
                 _pooledObjects.Add(obj);
             }
@@ -45,7 +50,7 @@ namespace __Scripts
 
             if (canExpand)
             {
-                GameObject obj = Instantiate(objectToPool, Vector3.zero, Quaternion.identity, transform);
+                GameObject obj = Instantiate(objectToPool, Vector3.zero, Quaternion.identity, _poolParent);
                 obj.SetActive(false);
                 _pooledObjects.Add(obj);
                 return obj;

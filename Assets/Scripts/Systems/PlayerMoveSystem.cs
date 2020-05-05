@@ -2,7 +2,6 @@
 using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Managers;
 
 namespace Systems
 {
@@ -24,6 +23,7 @@ namespace Systems
         }
 
         // Update is called once per frame
+        //TODO: Would be nice to have some Lerping Z Rotate in the direction we're moving
         void Update()
         {
             var deltaX = inputValue.x * PlayerMoveSpeed.Value * Time.deltaTime;

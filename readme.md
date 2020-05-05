@@ -20,10 +20,10 @@ The project makes use of a few [Unity FREE Particle Effects](https://assetstore.
 # Creative Commons Attributions: 
 Special credit to these awesome asset creators for the assets used!
 
-Oscar Selstam -  Free Red XWing on Sketchfab
-Metalmorag - Free Tie Fighter on Sketchfab
-Oscar Creativo  - Free Baby Yoda on Sketchfab
-Kenneys Assets - Itch.io
+- Oscar Selstam -  Free Red XWing on Sketchfab
+- Metalmorag - Free Tie Fighter on Sketchfab
+- Oscar Creativo  - Free Baby Yoda on Sketchfab
+- Kenneys Assets - Itch.io
 
 All Audio used was FREE on Freesound.Org - Credit to creators Hybrid_V, CraftyIndividual, Iwiploppenisse and Jammerboy70
 

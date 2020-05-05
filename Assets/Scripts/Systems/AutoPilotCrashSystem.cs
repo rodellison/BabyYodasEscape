@@ -23,7 +23,7 @@ namespace Systems
 
             for (float x = 0.0f; x <= 1.0f; x += Time.deltaTime * rate)
             {
-                position.y = Mathf.Lerp(startingHeight, -1f, x);
+                position.y = Mathf.Lerp(startingHeight, 0f, x);
                 yield return null;
                 transform.position = position;
             }      

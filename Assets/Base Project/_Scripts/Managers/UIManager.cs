@@ -3,6 +3,7 @@ using Base_Project._Scripts.Game_Events;
 using UnityEngine;
 using Managers;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace Base_Project._Scripts.Managers
 {
@@ -85,13 +86,15 @@ namespace Base_Project._Scripts.Managers
             Debug.Log(context);
             
             // // When the esc key is pressed
-             if (Keyboard.current[Key.Backquote].wasPressedThisFrame)
+             if (Keyboard.current[Key.Backquote].wasPressedThisFrame ||
+                 Gamepad.current[GamepadButton.North].wasPressedThisFrame)
              {
                  // Start counting to quit time
                  StartCoroutine("QuitGameTimer");
                  PauseAndUnpause();
              } // When the esc key is released
-             else if (Keyboard.current[Key.Backquote].wasReleasedThisFrame)
+             else if (Keyboard.current[Key.Backquote].wasReleasedThisFrame||
+                      Gamepad.current[GamepadButton.North].wasReleasedThisFrame)
              {
                  // Stop counting to quit time
                  StopCoroutine("QuitGameTimer");

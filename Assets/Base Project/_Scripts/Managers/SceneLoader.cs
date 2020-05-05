@@ -9,7 +9,7 @@ namespace Base_Project._Scripts.Managers
     {
         bool isLoading = false;
         private AsyncOperation async;
-        public GameEvent StartScene;
+        public GameEvent LevelStarted;
 
         private void Start()
         {
@@ -20,7 +20,7 @@ namespace Base_Project._Scripts.Managers
         {
             Debug.Log("Loaded Scene: " + arg0.name + ", index: " + arg0.buildIndex);
             //Set Parms, etc. as a result of the new scene finished loaded and is being presented...
-            StartScene.Raise();
+            LevelStarted.Raise();
         }
 
         // When the button is clicked, the new button will be loaded

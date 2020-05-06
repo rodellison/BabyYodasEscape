@@ -7,38 +7,42 @@ namespace Base_Project._Scripts.Managers
 {
     public class SceneLoader : MonoBehaviour
     {
+        //SceneLoader isn't concerned with managing which scene is next, etc. type logic - that should be handled
+        //by the GameManager.. This class just handles loading and unloading of Scenes..
+
         bool isLoading = false;
         private AsyncOperation async;
-        public GameEvent LevelStarted;
+        public GameEvent SceneLoaded;
 
         private void Start()
         {
-            SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
+        private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
             Debug.Log("Loaded Scene: " + arg0.name + ", index: " + arg0.buildIndex);
             //Set Parms, etc. as a result of the new scene finished loaded and is being presented...
-            LevelStarted.Raise();
+            SceneLoaded.Raise();
         }
 
         // When the button is clicked, the new button will be loaded
-        public void StartSceneLoad()
+        public void LoadScene(int SceneToLoad)
         {
             if (!isLoading)
             {
-                StartCoroutine(LoadScene(GameManager.Instance.SceneToLoad.Value));
+                StartCoroutine(AsyncSceneLoader(SceneToLoad));
             }
         }
 
-        // New level is loaded asynchronously in case it's a very large level. Can add loading effects here.
-        IEnumerator LoadScene(int level)
+        // New level is loaded asynchronously. Can add loading effects here.
+        IEnumerator AsyncSceneLoader(int level)
         {
             isLoading = true;
             async = SceneManager.LoadSceneAsync(level);
-            //This allows a lot of control, but have to be careful in it's use..
-            async.allowSceneActivation = false;
+            //async.allowSceneActivation (in combination with some code in the while loop below)
+            //allows fine grained control for when to activate the scene.. if not needed, just keep this stuff commented out
+            //async.allowSceneActivation = false;
 
             while (!async.isDone)
             {
@@ -46,10 +50,10 @@ namespace Base_Project._Scripts.Managers
                 // Check if the load has finished
                 if (async.progress >= 0.9f)
                 {
-                    //Wait to you press the space key to activate the Scene
-                    yield return doSomethingLoop();
+                    //Use an IEnumerator or an Input 
+                    //yield return doSomethingLoop();
                     //if (Input.GetKeyDown(KeyCode.Space))
-                    //Activate the Scene
+                    //to control when to Activate the Scene
                     async.allowSceneActivation = true;
                 }
             }

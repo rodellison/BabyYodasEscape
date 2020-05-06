@@ -1,5 +1,5 @@
 ﻿using Base_Project._Scripts.GameData;
-using Managers;
+using Base_Project._Scripts.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

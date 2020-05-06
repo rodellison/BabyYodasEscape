@@ -19,12 +19,18 @@ namespace Base_Project._Scripts.Managers
 
         private InputActionControls pauseControls;
 
+        private void Start()
+        {
+            SwitchToPanel("TitlePanel");
+        }
+
         private void OnEnable()
         {
             pauseControls = new InputActionControls();
             pauseControls.UI.SetCallbacks(this);
             pauseControls.Enable();
         }
+        
         public void SwitchToPanel(string panelToPresent)
         {
             foreach (GameObject g in panelsToManage)
@@ -51,21 +57,7 @@ namespace Base_Project._Scripts.Managers
             // SceneManager.UnloadSceneAsync(1);
         }
 
-        private void Start()
-        {
-            SwitchToPanel("TitlePanel");
-        }
-
-  // Alternates between pause and unpaused statuses
-        public void PauseAndUnpause()
-        {
-            isPaused = !isPaused;
-            Debug.Log("Pause state: " + isPaused);
-            Time.timeScale = isPaused ? 0f : 1f;
-            SettingsPausePanel.SetActive(isPaused);
-            
-        }
-
+  
         public void InitiateExitGame()
         {
             SwitchToPanel("EndGameCreditsPanel");
@@ -100,5 +92,16 @@ namespace Base_Project._Scripts.Managers
                  StopCoroutine("QuitGameTimer");
              }
         }
+        
+        // Alternates between pause and unpaused statuses
+        public void PauseAndUnpause()
+        {
+            isPaused = !isPaused;
+            Debug.Log("Pause state: " + isPaused);
+            Time.timeScale = isPaused ? 0f : 1f;
+            SettingsPausePanel.SetActive(isPaused);
+            
+        }
+
     }
 }

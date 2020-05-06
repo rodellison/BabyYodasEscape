@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace __Scripts
+namespace Base_Project._Scripts.Managers
 {
     public class ObjectPooler : MonoBehaviour
     {

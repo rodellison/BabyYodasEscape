@@ -1,5 +1,4 @@
 using System.Collections;
-using __Scripts;
 using Base_Project._Scripts.GameData;
 using UnityEngine;
 using Random = UnityEngine.Random;

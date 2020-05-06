@@ -2,10 +2,10 @@
 
 An ultra quick 5 day put together project to have something for Sci Fi Miami's 4th (Star Wars Day) Gamejam.
 
-This is a **Unity 2019.3** Universal Rendering Pipeline oriented project and makes use of the New Input System for handling
-player input (keyboard and gamepad). 
+This is a **Unity 2019.3** Universal Rendering Pipeline oriented project and makes use of the 
+**New Input System** for handling player input (keyboard and gamepad). 
 
-The game makes heavy use of Scriptable Objects for both Events and Data. 
+The game makes heavy use of **Scriptable Objects** for both Events and Data. 
 As such, you'll see a lot of GameEvent or GameEventListener type components on 
 many game objects, which will broadcast (or listen for broadcasts) of events 
 respectively and then handle it by invoking component methods on the respective game object.

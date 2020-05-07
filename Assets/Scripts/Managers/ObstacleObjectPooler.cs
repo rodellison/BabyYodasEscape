@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class ObstacleObjectPooler : MultiUseObjectPooler
+    public class ObstacleObjectPooler : ObjectPooler
     {
  
     }

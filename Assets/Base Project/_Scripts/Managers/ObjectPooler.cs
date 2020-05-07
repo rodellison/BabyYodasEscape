@@ -3,23 +3,14 @@ using UnityEngine;
 
 namespace Base_Project._Scripts.Managers
 {
-    public class MultiUseObjectPooler : MonoBehaviour
+    public abstract class ObjectPooler : MonoBehaviour
     {
-  //      public static MultiUseObjectPooler Instance;
-        private List<GameObject> _pooledObjects;
+       private List<GameObject> _pooledObjects;
         public GameObject objectToPool;
         public int maxItemsToPool = 15;
         private Transform _poolAnchor;
         public bool canExpand;
-
-        void Awake()
-        {
-           //This is the main difference between this version (MultiUseObjectPooler), and the other (SingletonObjectPool).
-           //In the Singleton version, the code there ensures there is only one Pool created. With this version,
-           //objects that implement can have independent pools of different objects while using the same script..
-  //         Instance = this;
-        }
-
+ 
         // Use this for initialization of the Object Pool
         void Start()
         {
@@ -58,8 +49,6 @@ namespace Base_Project._Scripts.Managers
                 _pooledObjects.Add(obj);
                 return obj;
             }
-
-
             return null;
         }
     }

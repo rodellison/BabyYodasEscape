@@ -7,7 +7,7 @@ namespace Base_Project._Scripts.Managers
 {
     public class SceneLoader : MonoBehaviour
     {
-        //SceneLoader isn't concerned with managing which scene is next, etc. type logic - that should be handled
+        //SceneLoader isn't concerned with managing which scene is next, last, etc. type logic - that should be handled
         //by the GameManager.. This class just handles loading and unloading of Scenes..
 
         bool isLoading = false;

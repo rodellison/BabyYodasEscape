@@ -1,5 +1,5 @@
 {
-    "name": "GameControls",
+    "name": "InputActionControls",
     "maps": [
         {
             "name": "Gameplay",
@@ -146,30 +146,8 @@
                 },
                 {
                     "name": "",
-                    "id": "890c4b54-f8d8-49f4-92f5-aa3212711bc6",
-                    "path": "<XInputController>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "GamePadController",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "93f67a4a-bcdd-456d-bae2-c5e39fec2d65",
                     "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "GamePadController",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "875148a9-cc5f-4a4a-8b74-75c16483ace0",
-                    "path": "<XInputController>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePadController",

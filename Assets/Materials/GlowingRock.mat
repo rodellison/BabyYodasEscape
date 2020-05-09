@@ -7,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DesertFloorWithOffset
-  m_Shader: {fileID: -6465566751694194690, guid: 8dc312efc1a1a6a4d9c9fbf81a6571e8,
+  m_Name: GlowingRock
+  m_Shader: {fileID: -6465566751694194690, guid: 7c1bc8aed6d18c14aace61ed81053d26,
     type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_LightmapFlags: 6
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -20,20 +20,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_534E0DE4:
-        m_Texture: {fileID: 2800000, guid: dc3765c75ee55a1438ac515138348362, type: 3}
+    - Texture2D_4FB2ED52:
+        m_Texture: {fileID: 2800000, guid: 3982111ed9aa2e7498036325e61e3aa7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - Texture2D_A1B7AF46:
-        m_Texture: {fileID: 2800000, guid: 8e5613ce209344542ae6e725834e5505, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_ED7BAF50:
-        m_Texture: {fileID: 2800000, guid: e54f41720217f914e944a1ca6a9cf21f, type: 3}
+    - Texture2D_EAEB2C02:
+        m_Texture: {fileID: 2800000, guid: 58605403eb0eedd40842de62c8e1caf4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 58605403eb0eedd40842de62c8e1caf4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -45,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 58605403eb0eedd40842de62c8e1caf4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -61,13 +57,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - GradientNoiseScale: 2
-    - Vector1_1B9483C: 0.5
-    - Vector1_2020B83: 10
-    - Vector1_6B13173F: 0
-    - Vector1_7CAB707F: 0.25
-    - Vector1_8356F2C0: 0
-    - Vector1_FED95AA8: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -80,7 +69,6 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OffsetSpeed: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -88,17 +76,17 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _TilingYOffset: -103.04431
-    - _VDisplacementSpeed: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Vector2_4CA1A6A7: {r: 1, g: 1, b: 0, a: 0}
-    - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - Color_677AE8DE: {r: 2, g: 0.04705882, b: 0, a: 0}
+    - Color_EAD87AB: {r: 0.3058824, g: 0.972549, b: 0.5898936, a: 0}
+    - Vector2_C2646CB4: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
---- !u!114 &4750671396743744705
+--- !u!114 &8597541389282613315
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

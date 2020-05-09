@@ -10,6 +10,7 @@ TagManager:
   - Obstacle
   - XWing
   - ObstacleSpawner
+  - LaserShot
   layers:
   - Default
   - TransparentFX

@@ -9,8 +9,8 @@ namespace Systems
     {
         public FloatVariable PlayerMoveSpeed;
         public FloatVariable maxPlayerHorizontalDistance;
-        Quaternion rotationMin = Quaternion.Euler(new Vector3(0f, 0f, -20f));
-        Quaternion rotationMax = Quaternion.Euler(new Vector3(0f, 0f, 20f));
+        public float MaxZRotation = 20f;
+       public Vector3 currentEulerAngles = Vector3.zero;
 
         // Start is called before the first frame update
         public InputActionControls playerControls;
@@ -19,42 +19,47 @@ namespace Systems
 
         private void OnEnable()
         {
-            playerControls = new InputActionControls();
+            if (playerControls == null)
+                playerControls = new InputActionControls();
+
             playerControls.Gameplay.SetCallbacks(this);
             playerControls.Enable();
         }
-
+ 
         // Update is called once per frame
-        //TODO: Would be nice to have some Lerping Z Rotate in the direction we're moving
         void Update()
         {
             var deltaX = inputValue.x * PlayerMoveSpeed.Value * Time.deltaTime;
             float currentYPos = transform.position.y;
-            Quaternion currentRotation = transform.rotation;
-
-            if (inputValue.x != 0 &&
+            Vector3 tempRotation = currentEulerAngles;
+         
+            if ((inputValue.x > 0.1f || inputValue.x < -0.1f) &&
                 (transform.position.x + deltaX < maxPlayerHorizontalDistance.Value &&
                  transform.position.x + deltaX > -maxPlayerHorizontalDistance.Value))
             {
-                transform.Translate(deltaX, 0f, 0f);
+                //Important to translate this item in WORLD space, not Local Space, otherwise rotations get wonky
+                transform.Translate(deltaX, 0f, 0f, Space.World);
 
-                transform.rotation = (inputValue.x > 0)
-                    ? Quaternion.Lerp(currentRotation, rotationMax, Time.deltaTime * 5f)
-                    : Quaternion.Lerp(currentRotation, rotationMin, Time.deltaTime * 5f);
+                tempRotation += new Vector3(0, 0, inputValue.x) * Time.deltaTime * 50f;
+                if (tempRotation.z <= MaxZRotation && tempRotation.z >= -MaxZRotation)
+                    currentEulerAngles = tempRotation;
             }
             else
             {
-                transform.rotation = Quaternion.Slerp(currentRotation, Quaternion.identity, Time.deltaTime * 5f);
+                currentEulerAngles = new Vector3(0, 0, Mathf.Lerp(currentEulerAngles.z, 0, Time.deltaTime * 5f));
             }
 
-            if (inputValue.z != 0)
+            transform.eulerAngles = currentEulerAngles;
+
+            if (inputValue.z > 0.1f || inputValue.z < -0.1f)
             {
                 var deltaPosition = inputValue.z * PlayerMoveSpeed.Value * 0.5f * Time.deltaTime;
                 var newTransformPosition = transform.position.y + deltaPosition;
-                //        Debug.Log(newTransformPosition);
                 //This is to make sure we keep the player in Vertical zone where we need..
                 if (newTransformPosition > 20f || newTransformPosition < 4f)
+                {
                     return;
+                }
 
                 transform.Translate(0f, deltaPosition, 0f);
             }
@@ -69,11 +74,10 @@ namespace Systems
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            Vector2 input2D = context.ReadValue<Vector2>();
+            Vector2 input2D;
+            input2D = context.ReadValue<Vector2>();
             inputValue.x = input2D.x;
             inputValue.z = input2D.y;
-
-            //      Debug.Log(" Move called");
         }
 
         public void OnShoot(InputAction.CallbackContext context)

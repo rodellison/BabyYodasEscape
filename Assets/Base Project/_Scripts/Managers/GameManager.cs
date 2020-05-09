@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Base_Project._Scripts.Game_Events;
 using Base_Project._Scripts.GameData;
@@ -12,12 +13,30 @@ namespace Base_Project._Scripts.Managers
         public IntVariable SceneToLoad;
         public IntVariable levelToLoad;
         public GameEvent LevelLoaded;
+        private AudioListener gmAudioListener;
         public static GameManager Instance { get; private set; }
 
+        private void Start()
+        {
+            gmAudioListener = GetComponent<AudioListener>();
+        }
 
         public void StartGame()
         {
             LoadScene(SceneToLoad.Value);
+
+            //Basically, one the game has loaded a scene, we'll turn the GameManager audio listener off. 
+            //It's purpose was to have a listener for the Title Screen and Intro. Once the game is in motion
+            //the individual scenes will have cameras that should have their own listeners attached..
+            //Ultimately we don't want two listeners at the same time..
+            //We'll invoke it with delay of a second so that the new Scene's listener will be running
+            Invoke("TurnOffGameManagerAudioListener", 1f);
+        }
+
+        void TurnOffGameManagerAudioListener()
+        {
+            if (gmAudioListener != null)
+                gmAudioListener.enabled = false;
         }
 
         /// <summary>
@@ -28,6 +47,7 @@ namespace Base_Project._Scripts.Managers
         {
             GetComponent<SceneLoader>().LoadScene(SceneToLoad);
         }
+
         public void LoadLevel(int LevelToLoad)
         {
             //Provided as a separate method for getting/setting level related properties and data (e.g. Remote Config type stuff), just in case 

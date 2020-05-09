@@ -12,7 +12,7 @@ namespace Systems
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Player has trigger crashed into an Obstacle");
+     //       Debug.Log("Player has trigger crashed into an Obstacle");
             Explosion.SetActive(true);
             LargeFire.SetActive(true);
             if (enableEventRaising)

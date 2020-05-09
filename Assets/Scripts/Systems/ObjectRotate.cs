@@ -2,7 +2,7 @@
 
 namespace Systems
 {
-    public class PlanetRotate : MonoBehaviour
+    public class ObjectRotate : MonoBehaviour
     {
         // Start is called before the first frame update
         public float RotationSpeed = 3f;
